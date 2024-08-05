@@ -1009,6 +1009,12 @@ pub struct Label {
     ///
     #[prost(string, tag = "8")]
     pub lottie_night: ::prost::alloc::string::String,
+    ///
+    #[prost(map = "string, string", tag = "9")]
+    pub report: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2552,6 +2558,15 @@ pub struct RelateLiveCard {
     ///
     #[prost(int64, tag = "4")]
     pub live_status: i64,
+    ///
+    #[prost(message, optional, tag = "5")]
+    pub rcmd_reason: ::core::option::Option<BadgeInfo>,
+    ///
+    #[prost(string, tag = "6")]
+    pub live_new_style: ::prost::alloc::string::String,
+    ///
+    #[prost(message, optional, tag = "7")]
+    pub stat_info: ::core::option::Option<StatInfo>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3869,6 +3884,8 @@ pub enum HonorType {
     HonorReply = 10,
     ///
     HonorProfession = 11,
+    ///
+    HonorHotWord = 12,
 }
 impl HonorType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -3889,6 +3906,7 @@ impl HonorType {
             HonorType::HonorMusic => "HONOR_MUSIC",
             HonorType::HonorReply => "HONOR_REPLY",
             HonorType::HonorProfession => "HONOR_PROFESSION",
+            HonorType::HonorHotWord => "HONOR_HOT_WORD",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3906,6 +3924,7 @@ impl HonorType {
             "HONOR_MUSIC" => Some(Self::HonorMusic),
             "HONOR_REPLY" => Some(Self::HonorReply),
             "HONOR_PROFESSION" => Some(Self::HonorProfession),
+            "HONOR_HOT_WORD" => Some(Self::HonorHotWord),
             _ => None,
         }
     }

@@ -592,6 +592,12 @@ pub struct AdContentExtraDto {
     ///
     #[prost(message, repeated, tag = "52")]
     pub live_booking_infos: ::prost::alloc::vec::Vec<LiveBookInfoDto>,
+    ///
+    #[prost(int32, tag = "53")]
+    pub user_cancel_jump_type: i32,
+    ///
+    #[prost(string, tag = "54")]
+    pub user_cancel_jump_url: ::prost::alloc::string::String,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

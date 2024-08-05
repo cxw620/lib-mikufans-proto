@@ -6,6 +6,11 @@ pub mod bilibili {
                 include!("bilibili.account.fission.v1.rs");
             }
         }
+        pub mod interfaces {
+            pub mod v1 {
+                include!("bilibili.account.interfaces.v1.rs");
+            }
+        }
         pub mod service {
             pub mod v1 {
                 include!("bilibili.account.service.v1.rs");

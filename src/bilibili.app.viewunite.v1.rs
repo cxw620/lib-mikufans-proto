@@ -404,6 +404,9 @@ pub struct ECodeConfig {
     ///
     #[prost(string, tag = "1")]
     pub redirect_url: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "2")]
+    pub msg: ::prost::alloc::string::String,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1293,6 +1296,8 @@ pub enum ECode {
     ///
     Code404 = 1,
     ///
+    CodeArcPrivacy = 2,
+    ///
     CodeTeenager = 78301,
 }
 impl ECode {
@@ -1304,6 +1309,7 @@ impl ECode {
         match self {
             ECode::CodeDefault => "CODE_DEFAULT",
             ECode::Code404 => "CODE_404",
+            ECode::CodeArcPrivacy => "CODE_ARC_PRIVACY",
             ECode::CodeTeenager => "CODE_TEENAGER",
         }
     }
@@ -1312,6 +1318,7 @@ impl ECode {
         match value {
             "CODE_DEFAULT" => Some(Self::CodeDefault),
             "CODE_404" => Some(Self::Code404),
+            "CODE_ARC_PRIVACY" => Some(Self::CodeArcPrivacy),
             "CODE_TEENAGER" => Some(Self::CodeTeenager),
             _ => None,
         }

@@ -2338,6 +2338,8 @@ pub enum SettingItemType {
     SettingVisionAssist = 25,
     ///
     SettingEdit = 26,
+    ///
+    SettingDislike = 27,
 }
 impl SettingItemType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -2373,6 +2375,7 @@ impl SettingItemType {
             SettingItemType::SettingPanorama => "SETTING_PANORAMA",
             SettingItemType::SettingVisionAssist => "SETTING_VISION_ASSIST",
             SettingItemType::SettingEdit => "SETTING_EDIT",
+            SettingItemType::SettingDislike => "SETTING_DISLIKE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2405,6 +2408,7 @@ impl SettingItemType {
             "SETTING_PANORAMA" => Some(Self::SettingPanorama),
             "SETTING_VISION_ASSIST" => Some(Self::SettingVisionAssist),
             "SETTING_EDIT" => Some(Self::SettingEdit),
+            "SETTING_DISLIKE" => Some(Self::SettingDislike),
             _ => None,
         }
     }

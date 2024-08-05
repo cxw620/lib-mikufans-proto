@@ -958,6 +958,12 @@ pub struct RmDynReq {
     ///
     #[prost(string, tag = "2")]
     pub dyn_id_str: ::prost::alloc::string::String,
+    ///
+    #[prost(int64, tag = "3")]
+    pub dyn_type: i64,
+    ///
+    #[prost(string, tag = "4")]
+    pub rid_str: ::prost::alloc::string::String,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

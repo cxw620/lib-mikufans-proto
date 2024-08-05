@@ -1,6 +1,6 @@
 [package]
 name = "lib-mikufans-proto"
-version = "8.5.0"
+version = "8.7.1"
 edition = "2021"
 rust-version = "1.70"
 

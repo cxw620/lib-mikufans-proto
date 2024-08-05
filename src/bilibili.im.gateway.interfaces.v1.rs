@@ -39,6 +39,29 @@ pub struct AtCard {
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BubbleMsg {
+    ///
+    #[prost(int64, tag = "1")]
+    pub mid: i64,
+    ///
+    #[prost(string, tag = "2")]
+    pub avatar: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "3")]
+    pub nick_name: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "4")]
+    pub content: ::prost::alloc::string::String,
+    ///
+    #[prost(enumeration = "MsgTabType", tag = "5")]
+    pub tab_type: i32,
+    ///
+    #[prost(enumeration = "MsgFeedMsgType", tag = "6")]
+    pub msg_type: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CardItem {
     ///
     #[prost(int64, tag = "1")]
@@ -215,23 +238,8 @@ pub struct GetBubbleMsgReq {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBubbleMsgRsp {
     ///
-    #[prost(int64, tag = "1")]
-    pub mid: i64,
-    ///
-    #[prost(string, tag = "2")]
-    pub avatar: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "3")]
-    pub nick_name: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "4")]
-    pub content: ::prost::alloc::string::String,
-    ///
-    #[prost(enumeration = "MsgTabType", tag = "5")]
-    pub tab_type: i32,
-    ///
-    #[prost(enumeration = "MsgFeedMsgType", tag = "6")]
-    pub msg_type: i32,
+    #[prost(message, optional, tag = "1")]
+    pub bubble_msg: ::core::option::Option<BubbleMsg>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -305,6 +313,15 @@ pub struct MsgFeedActionReq {
     ///
     #[prost(message, optional, tag = "3")]
     pub thank_params: ::core::option::Option<MsgFeedActionThankParams>,
+    ///
+    #[prost(enumeration = "MsgFeedMsgType", tag = "4")]
+    pub msg_type: i32,
+    ///
+    #[prost(enumeration = "MsgFeedFilterType", tag = "5")]
+    pub filter_type: i32,
+    ///
+    #[prost(bool, tag = "6")]
+    pub is_top_msg: bool,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

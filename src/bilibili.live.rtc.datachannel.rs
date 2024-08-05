@@ -497,12 +497,6 @@ pub struct UpdateSubReq {
     ///
     #[prost(oneof = "update_sub_req::AudioOption", tags = "2")]
     pub audio_option: ::core::option::Option<update_sub_req::AudioOption>,
-    ///
-    #[prost(oneof = "update_sub_req::VideoLayerOption", tags = "4")]
-    pub video_layer_option: ::core::option::Option<update_sub_req::VideoLayerOption>,
-    ///
-    #[prost(oneof = "update_sub_req::VideoOption", tags = "3")]
-    pub video_option: ::core::option::Option<update_sub_req::VideoOption>,
 }
 /// Nested message and enum types in `UpdateSubReq`.
 pub mod update_sub_req {
@@ -513,6 +507,22 @@ pub mod update_sub_req {
         ///
         #[prost(int32, tag = "1")]
         pub video_index: i32,
+        ///
+        #[prost(oneof = "video_prefer_layer::VideoTemporalLayerOption", tags = "2")]
+        pub video_temporal_layer_option: ::core::option::Option<
+            video_prefer_layer::VideoTemporalLayerOption,
+        >,
+    }
+    /// Nested message and enum types in `video_prefer_layer`.
+    pub mod video_prefer_layer {
+        ///
+        #[allow(clippy::derive_partial_eq_without_eq)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+        pub enum VideoTemporalLayerOption {
+            ///
+            #[prost(int32, tag = "2")]
+            TemporalIndex(i32),
+        }
     }
     ///
     #[allow(clippy::derive_partial_eq_without_eq)]
@@ -521,22 +531,6 @@ pub mod update_sub_req {
         ///
         #[prost(bool, tag = "2")]
         SubAudio(bool),
-    }
-    ///
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum VideoLayerOption {
-        ///
-        #[prost(message, tag = "4")]
-        Layer(VideoPreferLayer),
-    }
-    ///
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum VideoOption {
-        ///
-        #[prost(bool, tag = "3")]
-        SubVideo(bool),
     }
 }
 ///

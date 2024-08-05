@@ -1922,6 +1922,9 @@ pub struct CreationItemAction {
     ///
     #[prost(int64, tag = "5")]
     pub remain_edit_times: i64,
+    ///
+    #[prost(message, optional, tag = "6")]
+    pub confirmation_toast: ::core::option::Option<ThreePointDefaultToast>,
 }
 /// Nested message and enum types in `CreationItemAction`.
 pub mod creation_item_action {
@@ -9113,6 +9116,9 @@ pub struct WordNode {
     ///
     #[prost(message, optional, tag = "5")]
     pub underline_style: ::core::option::Option<word_node::UnderlineStyle>,
+    ///
+    #[prost(string, tag = "7")]
+    pub font_level: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `WordNode`.
 pub mod word_node {
