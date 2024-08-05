@@ -2338,6 +2338,9 @@ pub struct SearchCollectionCard {
     ///
     #[prost(message, optional, tag = "11")]
     pub inline_data: ::core::option::Option<SearchInlineData>,
+    ///
+    #[prost(int32, tag = "12")]
+    pub is_hide_title: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3460,6 +3463,9 @@ pub struct SearchPlayListCard {
     ///
     #[prost(string, tag = "7")]
     pub show_card_desc2: ::prost::alloc::string::String,
+    ///
+    #[prost(int32, tag = "8")]
+    pub is_hide_title: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3631,6 +3637,9 @@ pub struct SearchSeriesCard {
     ///
     #[prost(string, tag = "7")]
     pub show_card_desc2: ::prost::alloc::string::String,
+    ///
+    #[prost(int32, tag = "8")]
+    pub is_hide_title: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3876,6 +3885,9 @@ pub struct SearchTopGameCard {
     ///
     #[prost(message, optional, tag = "20")]
     pub card_layout: ::core::option::Option<CardLayout>,
+    ///
+    #[prost(message, optional, tag = "21")]
+    pub rec_tag: ::core::option::Option<ReasonStyle>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -4015,6 +4027,9 @@ pub struct SearchUpperCard {
     pub avatar_info: ::core::option::Option<
         super::super::super::super::dagw::component::avatar::v1::AvatarItem,
     >,
+    ///
+    #[prost(string, tag = "21")]
+    pub user_card_desc: ::prost::alloc::string::String,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

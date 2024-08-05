@@ -975,7 +975,7 @@ pub struct LinkNode {
 pub mod link_node {
     ///
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LinkNodeStyle {
         ///
         #[prost(bool, tag = "1")]
@@ -993,8 +993,8 @@ pub mod link_node {
         #[prost(double, tag = "5")]
         pub font_size: f64,
         ///
-        #[prost(int64, tag = "6")]
-        pub font_level: i64,
+        #[prost(string, tag = "7")]
+        pub font_level: ::prost::alloc::string::String,
     }
 }
 ///
@@ -1896,8 +1896,8 @@ pub struct WordNode {
     #[prost(message, optional, tag = "5")]
     pub style: ::core::option::Option<word_node::WordNodeStyle>,
     ///
-    #[prost(int64, tag = "6")]
-    pub font_level: i64,
+    #[prost(string, tag = "7")]
+    pub font_level: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `WordNode`.
 pub mod word_node {

@@ -55,6 +55,8 @@ pub enum PlayLimitCode {
     PlcChargingPlusUpgrade = 3,
     ///
     PlcChargingPlusReject = 4,
+    ///
+    PlcCommonCode = 5,
 }
 impl PlayLimitCode {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -68,6 +70,7 @@ impl PlayLimitCode {
             PlayLimitCode::PlcChargingPlusNotPass => "PLC_ChargingPlusNotPass",
             PlayLimitCode::PlcChargingPlusUpgrade => "PLC_ChargingPlusUpgrade",
             PlayLimitCode::PlcChargingPlusReject => "PLC_ChargingPlusReject",
+            PlayLimitCode::PlcCommonCode => "PLC_COMMON_CODE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -78,6 +81,7 @@ impl PlayLimitCode {
             "PLC_ChargingPlusNotPass" => Some(Self::PlcChargingPlusNotPass),
             "PLC_ChargingPlusUpgrade" => Some(Self::PlcChargingPlusUpgrade),
             "PLC_ChargingPlusReject" => Some(Self::PlcChargingPlusReject),
+            "PLC_COMMON_CODE" => Some(Self::PlcCommonCode),
             _ => None,
         }
     }

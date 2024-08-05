@@ -2,59 +2,30 @@
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ObtainChronosPackageReq {
+pub struct MidByNameReply {
     ///
-    #[prost(string, tag = "1")]
-    pub service_key: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "2")]
-    pub engine_version: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "3")]
-    pub biz_id: ::prost::alloc::string::String,
+    #[prost(map = "string, int64", tag = "1")]
+    pub name_map: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ObtainChronosPackageRsp {
+pub struct MidByNameReq {
     ///
-    #[prost(string, tag = "1")]
-    pub md5: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "2")]
-    pub url: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "3")]
-    pub sign: ::prost::alloc::string::String,
-}
-///
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ObtainChronosPackageV2Req {
-    ///
-    #[prost(string, tag = "1")]
-    pub service_key: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "2")]
-    pub engine_version: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "3")]
-    pub biz_id: ::prost::alloc::string::String,
-    ///
-    #[prost(string, tag = "4")]
-    pub business_app_key: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "1")]
+    pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Generated client implementations.
-pub mod chronos_service_client {
+pub mod account_interface_v1_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     ///
     #[derive(Debug, Clone)]
-    pub struct ChronosServiceClient<T> {
+    pub struct AccountInterfaceV1Client<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl<T> ChronosServiceClient<T>
+    impl<T> AccountInterfaceV1Client<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -72,7 +43,7 @@ pub mod chronos_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> ChronosServiceClient<InterceptedService<T, F>>
+        ) -> AccountInterfaceV1Client<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -86,7 +57,7 @@ pub mod chronos_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            ChronosServiceClient::new(InterceptedService::new(inner, interceptor))
+            AccountInterfaceV1Client::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -120,13 +91,10 @@ pub mod chronos_service_client {
             self
         }
         ///
-        pub async fn obtain_chronos_package(
+        pub async fn mid_by_name(
             &mut self,
-            request: impl tonic::IntoRequest<super::ObtainChronosPackageReq>,
-        ) -> std::result::Result<
-            tonic::Response<super::ObtainChronosPackageRsp>,
-            tonic::Status,
-        > {
+            request: impl tonic::IntoRequest<super::MidByNameReq>,
+        ) -> std::result::Result<tonic::Response<super::MidByNameReply>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -138,45 +106,14 @@ pub mod chronos_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/bilibili.polymer.chronos.v1.ChronosService/ObtainChronosPackage",
+                "/bilibili.account.interfaces.v1.AccountInterfaceV1/MidByName",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "bilibili.polymer.chronos.v1.ChronosService",
-                        "ObtainChronosPackage",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        ///
-        pub async fn obtain_chronos_package_v2(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ObtainChronosPackageV2Req>,
-        ) -> std::result::Result<
-            tonic::Response<super::ObtainChronosPackageRsp>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/bilibili.polymer.chronos.v1.ChronosService/ObtainChronosPackageV2",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "bilibili.polymer.chronos.v1.ChronosService",
-                        "ObtainChronosPackageV2",
+                        "bilibili.account.interfaces.v1.AccountInterfaceV1",
+                        "MidByName",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -184,39 +121,28 @@ pub mod chronos_service_client {
     }
 }
 /// Generated server implementations.
-pub mod chronos_service_server {
+pub mod account_interface_v1_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with ChronosServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with AccountInterfaceV1Server.
     #[async_trait]
-    pub trait ChronosService: Send + Sync + 'static {
+    pub trait AccountInterfaceV1: Send + Sync + 'static {
         ///
-        async fn obtain_chronos_package(
+        async fn mid_by_name(
             &self,
-            request: tonic::Request<super::ObtainChronosPackageReq>,
-        ) -> std::result::Result<
-            tonic::Response<super::ObtainChronosPackageRsp>,
-            tonic::Status,
-        >;
-        ///
-        async fn obtain_chronos_package_v2(
-            &self,
-            request: tonic::Request<super::ObtainChronosPackageV2Req>,
-        ) -> std::result::Result<
-            tonic::Response<super::ObtainChronosPackageRsp>,
-            tonic::Status,
-        >;
+            request: tonic::Request<super::MidByNameReq>,
+        ) -> std::result::Result<tonic::Response<super::MidByNameReply>, tonic::Status>;
     }
     ///
     #[derive(Debug)]
-    pub struct ChronosServiceServer<T: ChronosService> {
+    pub struct AccountInterfaceV1Server<T: AccountInterfaceV1> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T: ChronosService> ChronosServiceServer<T> {
+    impl<T: AccountInterfaceV1> AccountInterfaceV1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -267,9 +193,9 @@ pub mod chronos_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ChronosServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for AccountInterfaceV1Server<T>
     where
-        T: ChronosService,
+        T: AccountInterfaceV1,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -284,28 +210,25 @@ pub mod chronos_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/bilibili.polymer.chronos.v1.ChronosService/ObtainChronosPackage" => {
+                "/bilibili.account.interfaces.v1.AccountInterfaceV1/MidByName" => {
                     #[allow(non_camel_case_types)]
-                    struct ObtainChronosPackageSvc<T: ChronosService>(pub Arc<T>);
+                    struct MidByNameSvc<T: AccountInterfaceV1>(pub Arc<T>);
                     impl<
-                        T: ChronosService,
-                    > tonic::server::UnaryService<super::ObtainChronosPackageReq>
-                    for ObtainChronosPackageSvc<T> {
-                        type Response = super::ObtainChronosPackageRsp;
+                        T: AccountInterfaceV1,
+                    > tonic::server::UnaryService<super::MidByNameReq>
+                    for MidByNameSvc<T> {
+                        type Response = super::MidByNameReply;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ObtainChronosPackageReq>,
+                            request: tonic::Request<super::MidByNameReq>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ChronosService>::obtain_chronos_package(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as AccountInterfaceV1>::mid_by_name(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -317,56 +240,7 @@ pub mod chronos_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ObtainChronosPackageSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/bilibili.polymer.chronos.v1.ChronosService/ObtainChronosPackageV2" => {
-                    #[allow(non_camel_case_types)]
-                    struct ObtainChronosPackageV2Svc<T: ChronosService>(pub Arc<T>);
-                    impl<
-                        T: ChronosService,
-                    > tonic::server::UnaryService<super::ObtainChronosPackageV2Req>
-                    for ObtainChronosPackageV2Svc<T> {
-                        type Response = super::ObtainChronosPackageRsp;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ObtainChronosPackageV2Req>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ChronosService>::obtain_chronos_package_v2(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ObtainChronosPackageV2Svc(inner);
+                        let method = MidByNameSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -400,7 +274,7 @@ pub mod chronos_service_server {
             }
         }
     }
-    impl<T: ChronosService> Clone for ChronosServiceServer<T> {
+    impl<T: AccountInterfaceV1> Clone for AccountInterfaceV1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -412,7 +286,8 @@ pub mod chronos_service_server {
             }
         }
     }
-    impl<T: ChronosService> tonic::server::NamedService for ChronosServiceServer<T> {
-        const NAME: &'static str = "bilibili.polymer.chronos.v1.ChronosService";
+    impl<T: AccountInterfaceV1> tonic::server::NamedService
+    for AccountInterfaceV1Server<T> {
+        const NAME: &'static str = "bilibili.account.interfaces.v1.AccountInterfaceV1";
     }
 }

@@ -457,6 +457,21 @@ pub struct DanmuPlayerConfig {
     ///
     #[prost(bool, tag = "23")]
     pub player_danmaku_enable_herd_dm: bool,
+    ///
+    #[prost(bool, tag = "24")]
+    pub player_danmaku_blocktop_bottom: bool,
+    ///
+    #[prost(int32, tag = "25")]
+    pub player_danmaku_domain_v2: i32,
+    ///
+    #[prost(int32, tag = "26")]
+    pub player_danmaku_density: i32,
+    ///
+    #[prost(bool, tag = "27")]
+    pub player_danmaku_subtitle_proof: bool,
+    ///
+    #[prost(bool, tag = "28")]
+    pub player_danmaku_people_proof: bool,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -569,6 +584,15 @@ pub struct DanmuWebPlayerConfig {
     ///
     #[prost(map = "int32, int32", tag = "23")]
     pub ai_level_v2_map: ::std::collections::HashMap<i32, i32>,
+    ///
+    #[prost(bool, tag = "24")]
+    pub blocktop_bottom: bool,
+    ///
+    #[prost(int32, tag = "25")]
+    pub dm_area_v2: i32,
+    ///
+    #[prost(int32, tag = "26")]
+    pub dm_density: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -716,6 +740,21 @@ pub struct DmPlayerConfigReq {
     ///
     #[prost(message, optional, tag = "21")]
     pub enable_herd_dm: ::core::option::Option<PlayerDanmakuEnableHerdDm>,
+    ///
+    #[prost(message, optional, tag = "22")]
+    pub blocktop_bottom: ::core::option::Option<PlayerDanmakuBlocktopBottom>,
+    ///
+    #[prost(message, optional, tag = "23")]
+    pub domain_v2: ::core::option::Option<PlayerDanmakuDomainV2>,
+    ///
+    #[prost(message, optional, tag = "24")]
+    pub density: ::core::option::Option<PlayerDanmakuDensity>,
+    ///
+    #[prost(message, optional, tag = "25")]
+    pub subtitle_proof: ::core::option::Option<PlayerDanmakuSubtitleProof>,
+    ///
+    #[prost(message, optional, tag = "26")]
+    pub people_proof: ::core::option::Option<PlayerDanmakuPeopleProof>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1173,10 +1212,34 @@ pub struct PlayerDanmakuBlocktop {
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PlayerDanmakuBlocktopBottom {
+    ///
+    #[prost(bool, tag = "1")]
+    pub value: bool,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PlayerDanmakuDensity {
+    ///
+    #[prost(int32, tag = "1")]
+    pub value: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PlayerDanmakuDomain {
     ///
     #[prost(float, tag = "1")]
     pub value: f32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PlayerDanmakuDomainV2 {
+    ///
+    #[prost(int32, tag = "1")]
+    pub value: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1205,6 +1268,14 @@ pub struct PlayerDanmakuOpacity {
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PlayerDanmakuPeopleProof {
+    ///
+    #[prost(bool, tag = "1")]
+    pub value: bool,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PlayerDanmakuScalingfactor {
     ///
     #[prost(float, tag = "1")]
@@ -1225,6 +1296,14 @@ pub struct PlayerDanmakuSpeed {
     ///
     #[prost(int32, tag = "1")]
     pub value: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PlayerDanmakuSubtitleProof {
+    ///
+    #[prost(bool, tag = "1")]
+    pub value: bool,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

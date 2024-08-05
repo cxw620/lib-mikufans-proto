@@ -1936,9 +1936,6 @@ pub struct OperationCardNew {
     ///
     #[prost(oneof = "operation_card_new::Param", tags = "9, 10, 11, 12")]
     pub param: ::core::option::Option<operation_card_new::Param>,
-    ///
-    #[prost(oneof = "operation_card_new::Render", tags = "6, 7")]
-    pub render: ::core::option::Option<operation_card_new::Render>,
 }
 /// Nested message and enum types in `OperationCardNew`.
 pub mod operation_card_new {
@@ -1958,17 +1955,6 @@ pub mod operation_card_new {
         ///
         #[prost(message, tag = "12")]
         Game(super::BizReserveGameParam),
-    }
-    ///
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Render {
-        ///
-        #[prost(message, tag = "6")]
-        Standard(super::StandardCard),
-        ///
-        #[prost(message, tag = "7")]
-        Skip(super::OperationCard),
     }
 }
 ///

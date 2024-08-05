@@ -74,6 +74,9 @@ pub struct Courseware {
     ///
     #[prost(string, tag = "6")]
     pub file_url: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "7")]
+    pub icon: ::prost::alloc::string::String,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -82,6 +85,17 @@ pub struct CoursewareInfo {
     ///
     #[prost(message, repeated, tag = "1")]
     pub coursewares: ::prost::alloc::vec::Vec<Courseware>,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct CredentialInfo {
+    ///
+    #[prost(bool, tag = "1")]
+    pub tab_show: bool,
+    ///
+    #[prost(bool, tag = "2")]
+    pub tab_badge_show: bool,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -248,6 +262,37 @@ pub struct LiveInfo {
     ///
     #[prost(bool, tag = "6")]
     pub be_subscription_prebook: bool,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetdiskCourseware {
+    ///
+    #[prost(int64, tag = "1")]
+    pub courseware_id: i64,
+    ///
+    #[prost(string, tag = "2")]
+    pub name: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "3")]
+    pub remark: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "4")]
+    pub desc: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "5")]
+    pub url: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "6")]
+    pub icon: ::prost::alloc::string::String,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetdiskCoursewareInfo {
+    ///
+    #[prost(message, repeated, tag = "1")]
+    pub coursewares: ::prost::alloc::vec::Vec<NetdiskCourseware>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -559,6 +604,12 @@ pub struct ViewPugvAny {
     ///
     #[prost(message, optional, tag = "13")]
     pub gift_info: ::core::option::Option<GiftInfo>,
+    ///
+    #[prost(message, optional, tag = "14")]
+    pub netdisk_courseware_info: ::core::option::Option<NetdiskCoursewareInfo>,
+    ///
+    #[prost(message, optional, tag = "15")]
+    pub credential_info: ::core::option::Option<CredentialInfo>,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
