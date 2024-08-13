@@ -209,6 +209,9 @@ pub mod bapi_live_rtc_token_proto {
         ///
         #[prost(string, tag = "9")]
         pub business_name: ::prost::alloc::string::String,
+        ///
+        #[prost(message, optional, tag = "10")]
+        pub turn_addr: ::core::option::Option<TurnAddr>,
     }
     ///
     #[allow(clippy::derive_partial_eq_without_eq)]
@@ -226,6 +229,66 @@ pub mod bapi_live_rtc_token_proto {
         ///
         #[prost(enumeration = "super::bapi_live_rtc_user_proto::UserRole", tag = "4")]
         pub role: i32,
+    }
+    ///
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct TurnAddr {
+        ///
+        #[prost(string, tag = "1")]
+        pub username: ::prost::alloc::string::String,
+        ///
+        #[prost(string, tag = "2")]
+        pub password: ::prost::alloc::string::String,
+        ///
+        #[prost(string, repeated, tag = "3")]
+        pub addr: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+        ///
+        #[prost(int32, repeated, tag = "4")]
+        pub protocol: ::prost::alloc::vec::Vec<i32>,
+    }
+    ///
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum TurnProtocol {
+        ///
+        Udp = 0,
+        ///
+        Tcp = 1,
+        ///
+        Tls = 2,
+    }
+    impl TurnProtocol {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TurnProtocol::Udp => "UDP",
+                TurnProtocol::Tcp => "TCP",
+                TurnProtocol::Tls => "TLS",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UDP" => Some(Self::Udp),
+                "TCP" => Some(Self::Tcp),
+                "TLS" => Some(Self::Tls),
+                _ => None,
+            }
+        }
     }
 }
 ///

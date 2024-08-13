@@ -30,6 +30,37 @@ pub struct EmotionInfo {
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserCosmoStateReq {
+    ///
+    #[prost(string, tag = "1")]
+    pub business: ::prost::alloc::string::String,
+    ///
+    #[prost(int64, tag = "2")]
+    pub card_send_mid: i64,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserCosmoStateRsp {
+    ///
+    #[prost(string, tag = "1")]
+    pub business: ::prost::alloc::string::String,
+    ///
+    #[prost(int64, tag = "2")]
+    pub card_send_mid: i64,
+    ///
+    #[prost(int32, tag = "3")]
+    pub cosmo_state: i32,
+    ///
+    #[prost(int32, tag = "4")]
+    pub op_type: i32,
+    ///
+    #[prost(string, tag = "5")]
+    pub text: ::prost::alloc::string::String,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct HasLikeState {
     ///
@@ -794,6 +825,31 @@ pub struct SysMsgInterfaceLastMsgRsp {
     pub id: i64,
 }
 ///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateUserCosmoStateReq {
+    ///
+    #[prost(string, tag = "1")]
+    pub business: ::prost::alloc::string::String,
+    ///
+    #[prost(int64, tag = "2")]
+    pub card_send_mid: i64,
+    ///
+    #[prost(int32, tag = "3")]
+    pub cosmo_state: i32,
+    ///
+    #[prost(int32, tag = "4")]
+    pub op_type: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateUserCosmoStateRsp {
+    ///
+    #[prost(string, tag = "1")]
+    pub text: ::prost::alloc::string::String,
+}
+///
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum MsgLikeAction {
@@ -1348,6 +1404,37 @@ pub mod im_interface_client {
                     GrpcMethod::new(
                         "bilibili.im.interfaces.v1.ImInterface",
                         "GetTotalUnread",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        ///
+        pub async fn get_user_cosmo_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetUserCosmoStateReq>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetUserCosmoStateRsp>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/bilibili.im.interfaces.v1.ImInterface/GetUserCosmoState",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "bilibili.im.interfaces.v1.ImInterface",
+                        "GetUserCosmoState",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -1915,6 +2002,37 @@ pub mod im_interface_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        ///
+        pub async fn update_user_cosmo_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateUserCosmoStateReq>,
+        ) -> std::result::Result<
+            tonic::Response<super::UpdateUserCosmoStateRsp>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/bilibili.im.interfaces.v1.ImInterface/UpdateUserCosmoState",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "bilibili.im.interfaces.v1.ImInterface",
+                        "UpdateUserCosmoState",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -1998,6 +2116,14 @@ pub mod im_interface_server {
             &self,
             request: tonic::Request<super::ReqTotalUnread>,
         ) -> std::result::Result<tonic::Response<super::RspTotalUnread>, tonic::Status>;
+        ///
+        async fn get_user_cosmo_state(
+            &self,
+            request: tonic::Request<super::GetUserCosmoStateReq>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetUserCosmoStateRsp>,
+            tonic::Status,
+        >;
         ///
         async fn group_assis_msg(
             &self,
@@ -2113,6 +2239,14 @@ pub mod im_interface_server {
             &self,
             request: tonic::Request<super::DummyReq>,
         ) -> std::result::Result<tonic::Response<super::DummyRsp>, tonic::Status>;
+        ///
+        async fn update_user_cosmo_state(
+            &self,
+            request: tonic::Request<super::UpdateUserCosmoStateReq>,
+        ) -> std::result::Result<
+            tonic::Response<super::UpdateUserCosmoStateRsp>,
+            tonic::Status,
+        >;
     }
     ///
     #[derive(Debug)]
@@ -2762,6 +2896,52 @@ pub mod im_interface_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetTotalUnreadSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/bilibili.im.interfaces.v1.ImInterface/GetUserCosmoState" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetUserCosmoStateSvc<T: ImInterface>(pub Arc<T>);
+                    impl<
+                        T: ImInterface,
+                    > tonic::server::UnaryService<super::GetUserCosmoStateReq>
+                    for GetUserCosmoStateSvc<T> {
+                        type Response = super::GetUserCosmoStateRsp;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetUserCosmoStateReq>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ImInterface>::get_user_cosmo_state(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetUserCosmoStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -3650,6 +3830,52 @@ pub mod im_interface_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = UpdateUnflwReadSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/bilibili.im.interfaces.v1.ImInterface/UpdateUserCosmoState" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateUserCosmoStateSvc<T: ImInterface>(pub Arc<T>);
+                    impl<
+                        T: ImInterface,
+                    > tonic::server::UnaryService<super::UpdateUserCosmoStateReq>
+                    for UpdateUserCosmoStateSvc<T> {
+                        type Response = super::UpdateUserCosmoStateRsp;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateUserCosmoStateReq>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as ImInterface>::update_user_cosmo_state(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = UpdateUserCosmoStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

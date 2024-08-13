@@ -1144,6 +1144,12 @@ pub struct Opus {
     ///
     #[prost(message, optional, tag = "9")]
     pub article: ::core::option::Option<Article>,
+    ///
+    #[prost(message, optional, tag = "10")]
+    pub version: ::core::option::Option<Version>,
+    ///
+    #[prost(int64, tag = "11")]
+    pub music_id: i64,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1175,6 +1181,12 @@ pub struct OpusSummary {
     ///
     #[prost(message, optional, tag = "6")]
     pub pub_info: ::core::option::Option<PubInfo>,
+    ///
+    #[prost(message, optional, tag = "7")]
+    pub version: ::core::option::Option<Version>,
+    ///
+    #[prost(int64, tag = "8")]
+    pub music_id: i64,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1829,6 +1841,17 @@ pub struct UserCreateMeta {
     ///
     #[prost(int32, tag = "3")]
     pub repost_mode: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct Version {
+    ///
+    #[prost(int64, tag = "1")]
+    pub cvid: i64,
+    ///
+    #[prost(int64, tag = "2")]
+    pub version_id: i64,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

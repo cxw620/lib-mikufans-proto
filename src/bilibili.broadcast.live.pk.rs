@@ -249,6 +249,12 @@ pub struct PkBasic {
     ///
     #[prost(string, tag = "17")]
     pub status_msg: ::prost::alloc::string::String,
+    ///
+    #[prost(map = "string, string", tag = "18")]
+    pub satellite_info: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

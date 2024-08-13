@@ -495,8 +495,8 @@ pub struct UpdateSubReq {
     #[prost(int64, tag = "1")]
     pub uid: i64,
     ///
-    #[prost(oneof = "update_sub_req::AudioOption", tags = "2")]
-    pub audio_option: ::core::option::Option<update_sub_req::AudioOption>,
+    #[prost(oneof = "update_sub_req::VideoLayerOption", tags = "4")]
+    pub video_layer_option: ::core::option::Option<update_sub_req::VideoLayerOption>,
 }
 /// Nested message and enum types in `UpdateSubReq`.
 pub mod update_sub_req {
@@ -527,10 +527,10 @@ pub mod update_sub_req {
     ///
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum AudioOption {
+    pub enum VideoLayerOption {
         ///
-        #[prost(bool, tag = "2")]
-        SubAudio(bool),
+        #[prost(message, tag = "4")]
+        Layer(VideoPreferLayer),
     }
 }
 ///

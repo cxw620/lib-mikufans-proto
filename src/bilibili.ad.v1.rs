@@ -431,6 +431,9 @@ pub struct AdCardDto {
     ///
     #[prost(int32, tag = "80")]
     pub live_page_type: i32,
+    ///
+    #[prost(int32, tag = "81")]
+    pub playpage_card_style: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -88,7 +88,7 @@ pub struct CoursewareInfo {
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CredentialInfo {
     ///
     #[prost(bool, tag = "1")]
@@ -96,6 +96,9 @@ pub struct CredentialInfo {
     ///
     #[prost(bool, tag = "2")]
     pub tab_badge_show: bool,
+    ///
+    #[prost(string, tag = "3")]
+    pub tab_url: ::prost::alloc::string::String,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

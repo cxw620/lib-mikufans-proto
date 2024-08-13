@@ -150,6 +150,25 @@ pub struct QueryRecAfterClickResult {
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SearchDelFollowRequest {
+    ///
+    #[prost(int64, tag = "1")]
+    pub cid: i64,
+    ///
+    #[prost(enumeration = "FollowTypeEnum", tag = "2")]
+    pub follow_type: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchDelFollowResponse {
+    ///
+    #[prost(string, tag = "1")]
+    pub toast: ::prost::alloc::string::String,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEggInfo {
     ///
@@ -218,6 +237,25 @@ pub struct SearchEggReply {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SearchEggReq {}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SearchFollowRequest {
+    ///
+    #[prost(int64, tag = "1")]
+    pub cid: i64,
+    ///
+    #[prost(enumeration = "FollowTypeEnum", tag = "2")]
+    pub follow_type: i32,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchFollowResponse {
+    ///
+    #[prost(string, tag = "1")]
+    pub toast: ::prost::alloc::string::String,
+}
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -321,6 +359,35 @@ impl Action {
             "ACTION_CANCEL_LIKE" => Some(Self::CancelLike),
             "ACTION_DISLIKE" => Some(Self::Dislike),
             "ACTION_CANCEL_DISLIKE" => Some(Self::CancelDislike),
+            _ => None,
+        }
+    }
+}
+///
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum FollowTypeEnum {
+    ///
+    Unknown = 0,
+    ///
+    Comic = 1,
+}
+impl FollowTypeEnum {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FollowTypeEnum::Unknown => "UNKNOWN",
+            FollowTypeEnum::Comic => "COMIC",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "UNKNOWN" => Some(Self::Unknown),
+            "COMIC" => Some(Self::Comic),
             _ => None,
         }
     }
@@ -513,6 +580,34 @@ pub mod search_client {
             self.inner.unary(req, path, codec).await
         }
         ///
+        pub async fn search_del_follow(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchDelFollowRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchDelFollowResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/bilibili.app.search.v2.Search/SearchDelFollow",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("bilibili.app.search.v2.Search", "SearchDelFollow"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        ///
         pub async fn search_egg(
             &mut self,
             request: impl tonic::IntoRequest<super::SearchEggReq>,
@@ -533,6 +628,34 @@ pub mod search_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("bilibili.app.search.v2.Search", "SearchEgg"));
+            self.inner.unary(req, path, codec).await
+        }
+        ///
+        pub async fn search_follow(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchFollowRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchFollowResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/bilibili.app.search.v2.Search/SearchFollow",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("bilibili.app.search.v2.Search", "SearchFollow"),
+                );
             self.inner.unary(req, path, codec).await
         }
         ///
@@ -661,10 +784,26 @@ pub mod search_server {
             tonic::Status,
         >;
         ///
+        async fn search_del_follow(
+            &self,
+            request: tonic::Request<super::SearchDelFollowRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchDelFollowResponse>,
+            tonic::Status,
+        >;
+        ///
         async fn search_egg(
             &self,
             request: tonic::Request<super::SearchEggReq>,
         ) -> std::result::Result<tonic::Response<super::SearchEggReply>, tonic::Status>;
+        ///
+        async fn search_follow(
+            &self,
+            request: tonic::Request<super::SearchFollowRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchFollowResponse>,
+            tonic::Status,
+        >;
         ///
         async fn search_like(
             &self,
@@ -938,6 +1077,51 @@ pub mod search_server {
                     };
                     Box::pin(fut)
                 }
+                "/bilibili.app.search.v2.Search/SearchDelFollow" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchDelFollowSvc<T: Search>(pub Arc<T>);
+                    impl<
+                        T: Search,
+                    > tonic::server::UnaryService<super::SearchDelFollowRequest>
+                    for SearchDelFollowSvc<T> {
+                        type Response = super::SearchDelFollowResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchDelFollowRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as Search>::search_del_follow(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SearchDelFollowSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/bilibili.app.search.v2.Search/SearchEgg" => {
                     #[allow(non_camel_case_types)]
                     struct SearchEggSvc<T: Search>(pub Arc<T>);
@@ -966,6 +1150,51 @@ pub mod search_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = SearchEggSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/bilibili.app.search.v2.Search/SearchFollow" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchFollowSvc<T: Search>(pub Arc<T>);
+                    impl<
+                        T: Search,
+                    > tonic::server::UnaryService<super::SearchFollowRequest>
+                    for SearchFollowSvc<T> {
+                        type Response = super::SearchFollowResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchFollowRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as Search>::search_follow(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SearchFollowSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

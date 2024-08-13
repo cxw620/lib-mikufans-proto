@@ -54,6 +54,9 @@ pub struct AdInfo {
     ///
     #[prost(int64, tag = "17")]
     pub nature_ad: i64,
+    ///
+    #[prost(int32, tag = "18")]
+    pub content_fast_access: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]

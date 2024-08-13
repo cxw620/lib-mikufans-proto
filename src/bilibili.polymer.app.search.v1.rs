@@ -751,6 +751,20 @@ pub struct FollowButton {
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FollowButtonV2 {
+    ///
+    #[prost(string, tag = "1")]
+    pub icon: ::prost::alloc::string::String,
+    ///
+    #[prost(map = "int32, string", tag = "2")]
+    pub texts: ::std::collections::HashMap<i32, ::prost::alloc::string::String>,
+    ///
+    #[prost(string, tag = "3")]
+    pub status_report: ::prost::alloc::string::String,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FullTextResult {
     ///
     #[prost(int32, tag = "1")]
@@ -1853,6 +1867,9 @@ pub struct SearchAllResponse {
     ///
     #[prost(int64, tag = "19")]
     pub all_double_column: i64,
+    ///
+    #[prost(int32, tag = "20")]
+    pub is_new_user: i32,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2367,6 +2384,27 @@ pub struct SearchComicCard {
     ///
     #[prost(message, optional, tag = "7")]
     pub card_layout: ::core::option::Option<CardLayout>,
+    ///
+    #[prost(message, repeated, tag = "8")]
+    pub episodes_new: ::prost::alloc::vec::Vec<EpisodeNew>,
+    ///
+    #[prost(message, optional, tag = "9")]
+    pub rec_tag: ::core::option::Option<ReasonStyle>,
+    ///
+    #[prost(message, optional, tag = "10")]
+    pub follow_button: ::core::option::Option<FollowButtonV2>,
+    ///
+    #[prost(int32, tag = "11")]
+    pub is_attend: i32,
+    ///
+    #[prost(string, tag = "12")]
+    pub selection_style: ::prost::alloc::string::String,
+    ///
+    #[prost(string, tag = "13")]
+    pub rec_text: ::prost::alloc::string::String,
+    ///
+    #[prost(int64, tag = "14")]
+    pub cid: i64,
 }
 ///
 #[allow(clippy::derive_partial_eq_without_eq)]
